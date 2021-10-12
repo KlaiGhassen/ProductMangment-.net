@@ -10,11 +10,11 @@ namespace Domain.Entities
         public String Herbs { get; set; }
 
 
-        public override void GetDetails()
-        {
-            base.GetDetails();
-            Console.WriteLine("herbs"+ Herbs);
-        }
+        //public override void GetDetails()
+        //{
+        //    base.GetDetails();
+        //    Console.WriteLine("herbs"+ Herbs);
+        //}
         public Biological()
         {
         }

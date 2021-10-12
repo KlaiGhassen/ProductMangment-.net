@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Domain.Entities
 {
-  public  class Product: Concept
+  public  class Product
     {
         public DateTime DateProd { get; set; }
         public String Description { get; set; }
@@ -14,9 +14,9 @@ namespace Domain.Entities
 
         public int ProductId { get; set; }
         public int Quantity { get; set; }
-        public Category MyCategory { get; set; }
+        public virtual  Category MyCategory { get; set; }
 
-      IEnumerable<Provider> Providers;
+     public virtual ICollection<Provider> Providers { get; set; }
 
         public Product() { }
 
@@ -25,10 +25,10 @@ namespace Domain.Entities
             return base.ToString();
         }
 
-        public override void GetDetails()
-        {
+        //public override void GetDetails()
+        //{
 
-            Console.WriteLine("DateProd :"+ DateProd+ "Description "+ Description, "Name", Name, "Price", Price, "ProductId", ProductId, "Quantity", Quantity);
-        }
+        //    Console.WriteLine("DateProd :"+ DateProd+ "Description "+ Description, "Name", Name, "Price", Price, "ProductId", ProductId, "Quantity", Quantity);
+        //}
     }
 }

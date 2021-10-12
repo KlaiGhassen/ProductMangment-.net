@@ -12,11 +12,11 @@ namespace Domain.Entities
         public String LabName { get; set; }
         public String StreetAdress { get; set; }
 
-        public override void GetDetails()
-        {
-            base.GetDetails();
-            Console.WriteLine("city " + City + "LabName" + LabName+ "StreetAdress"+ StreetAdress);
-        }
+        //public override void GetDetails()
+        //{
+        //    base.GetDetails();
+        //    Console.WriteLine("city " + City + "LabName" + LabName+ "StreetAdress"+ StreetAdress);
+        //}
         public Chemical()
         {
         }

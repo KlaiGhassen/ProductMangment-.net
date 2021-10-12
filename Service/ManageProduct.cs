@@ -59,6 +59,29 @@ namespace Service
 
             return listProduct.ToList().Count();
         }
+        public List<Product> GetChimicalCity() {
+            var result = from product in products
+                         where (product is Chemical)
+                         orderby ((Chemical)product).City
+                         select(product);
+            return result.ToList();
+        }
+        public void GetChimicalGroupByCity() {
+            var result = from product in products
+                         where (product is Chemical)
+                         orderby ((Chemical)product).City
+                         group ((Chemical)product) by ((Chemical)product).City;
+            //return un autre type key == entity egrouping 
+
+            foreach (var groupingProduct in result) {
+                Console.WriteLine("City ="+ groupingProduct.Key);
+                foreach (var product in groupingProduct) { 
+                Console.WriteLine("Product =" + product.Name);
+                }
+            }
+
+
+        }
 
 
     }

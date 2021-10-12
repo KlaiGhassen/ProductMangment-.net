@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Domain.Entities
 {
-    public class Provider : Concept
+    public class Provider 
     {
 
         public String ConfirmedPassword { get; set; }
@@ -14,6 +14,7 @@ namespace Domain.Entities
 
         public int Id { get; set; }
         public bool IsAprroved { get; set; }
+        private String password { get; set; }
         public String Password { get; set; }
         public String UserName { get; set; }
           IEnumerable<Product> Products;
@@ -21,6 +22,7 @@ namespace Domain.Entities
 
         public Provider()
         {
+            Password = password;
         }
 
         public static void SetIsApproved(Provider p) {
@@ -28,7 +30,7 @@ namespace Domain.Entities
             p.IsAprroved = false;
 
 
-            if (String.Compare(p.Password, p.ConfirmedPassword) == 0)
+            if (String.Compare(p.password, p.ConfirmedPassword) == 0)
             {
 
                 p.IsAprroved = true;
@@ -54,10 +56,10 @@ namespace Domain.Entities
 
             }
 
-        public override void GetDetails()
-        {
-            Console.WriteLine("UserName" + UserName + "DateCreated" + DateCreated + "Email" + Email + "Id" + Id + "IsAprroved" + IsAprroved + "Password" + Password);
-        }
+        //public override void GetDetails()
+        //{
+        //    Console.WriteLine("UserName" + UserName + "DateCreated" + DateCreated + "Email" + Email + "Id" + Id + "IsAprroved" + IsAprroved + "Password" + password);
+        //}
     }
 
         

@@ -115,7 +115,7 @@ namespace Console
                     if (product.Name.ToUpper().StartsWith(c.ToUpper()))
                     {
 
-                        product.GetDetails();
+                     System.Console.WriteLine(  product.Name);
                     
                     }
                    
