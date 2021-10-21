@@ -10,7 +10,7 @@ namespace Domain.Entities
         public int CategoryId   { get; set; }
 
         public String Name { get; set; }
-        IEnumerable<Product> Products { get; set; }
+       virtual public ICollection<Product> Products { get; set; }
 
 
         public Category()
