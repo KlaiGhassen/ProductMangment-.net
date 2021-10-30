@@ -19,6 +19,8 @@ namespace Data
         public DbSet<Product> Produts { get; set; }
         public DbSet<Provider> Providers { get; set; }
         public DbSet<Category> categories { get; set; }
+        public DbSet<Chemical> chemicals { get; set; }
+        public  DbSet<Biological>  biologicals { get; set; }
 
 
     }

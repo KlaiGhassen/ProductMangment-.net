@@ -29,6 +29,7 @@ namespace Domain.Entities
         public bool IsAprroved { get; set; }
         private String password { get; set; }
         public String UserName { get; set; }
+
         virtual public ICollection<Product> Products { get; set; }
 
 

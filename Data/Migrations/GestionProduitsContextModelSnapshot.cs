@@ -50,6 +50,10 @@ namespace Data.Migrations
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("Discriminator")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(25)
@@ -69,6 +73,8 @@ namespace Data.Migrations
                     b.HasIndex("CategoryId");
 
                     b.ToTable("Produts");
+
+                    b.HasDiscriminator<string>("Discriminator").HasValue("Product");
                 });
 
             modelBuilder.Entity("Domain.Entities.Provider", b =>
@@ -113,6 +119,29 @@ namespace Data.Migrations
                     b.HasIndex("ProvidersId");
 
                     b.ToTable("ProductProvider");
+                });
+
+            modelBuilder.Entity("Domain.Entities.Biological", b =>
+                {
+                    b.HasBaseType("Domain.Entities.Product");
+
+                    b.Property<string>("Herbs")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasDiscriminator().HasValue("Biological");
+                });
+
+            modelBuilder.Entity("Domain.Entities.Chemical", b =>
+                {
+                    b.HasBaseType("Domain.Entities.Product");
+
+                    b.Property<string>("City")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("StreetAdress")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasDiscriminator().HasValue("Chemical");
                 });
 
             modelBuilder.Entity("Domain.Entities.Product", b =>

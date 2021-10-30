@@ -54,7 +54,7 @@ namespace Service
         }
         public int GetCountProduct(string city) {
             var listProduct = from product in products
-                              where (product is Chemical && ((Chemical)product).City.Equals(city))
+                              where (product is Chemical && ((Chemical)product).MyAdress.City.Equals(city))
                               select (product);
 
             return listProduct.ToList().Count();
@@ -62,15 +62,15 @@ namespace Service
         public List<Product> GetChimicalCity() {
             var result = from product in products
                          where (product is Chemical)
-                         orderby ((Chemical)product).City
+                         orderby ((Chemical)product).MyAdress.City
                          select(product);
             return result.ToList();
         }
         public void GetChimicalGroupByCity() {
             var result = from product in products
                          where (product is Chemical)
-                         orderby ((Chemical)product).City
-                         group ((Chemical)product) by ((Chemical)product).City;
+                         orderby ((Chemical)product).MyAdress.City
+                         group ((Chemical)product) by ((Chemical)product).MyAdress.City;
             //return un autre type key == entity egrouping 
 
             foreach (var groupingProduct in result) {

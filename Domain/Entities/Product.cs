@@ -31,6 +31,8 @@ namespace Domain.Entities
         public virtual  Category MyCategory { get; set; }
         public string image { get; set; }
 
+
+
      public virtual ICollection<Provider> Providers { get; set; }
 
         public Product() { }
