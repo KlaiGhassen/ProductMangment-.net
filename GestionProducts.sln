@@ -9,7 +9,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Domain", "Domain\Domain.csp
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Service", "Service\Service.csproj", "{CF8D1E1C-206A-4718-9014-DC94FD7E1358}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Data", "Data\Data.csproj", "{DD5CD91F-BE6D-4478-BFAE-90382AD90C0E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Data", "Data\Data.csproj", "{DD5CD91F-BE6D-4478-BFAE-90382AD90C0E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServicePattern", "ServicePattern\ServicePattern.csproj", "{7616D9C1-D056-45D1-9E45-8AA4CD953C30}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{DD5CD91F-BE6D-4478-BFAE-90382AD90C0E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DD5CD91F-BE6D-4478-BFAE-90382AD90C0E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DD5CD91F-BE6D-4478-BFAE-90382AD90C0E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7616D9C1-D056-45D1-9E45-8AA4CD953C30}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7616D9C1-D056-45D1-9E45-8AA4CD953C30}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7616D9C1-D056-45D1-9E45-8AA4CD953C30}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7616D9C1-D056-45D1-9E45-8AA4CD953C30}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

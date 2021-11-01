@@ -35,6 +35,9 @@ namespace Domain.Entities
 
      public virtual ICollection<Provider> Providers { get; set; }
 
+
+        public virtual ICollection<Facture> factures { get; set; }
+
         public Product() { }
 
         public override string ToString()

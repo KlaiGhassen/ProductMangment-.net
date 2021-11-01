@@ -20,6 +20,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Domain\Domain.csproj" />
+    <ProjectReference Include="..\ServicePattern\ServicePattern.csproj" />
   </ItemGroup>
 
 </Project>

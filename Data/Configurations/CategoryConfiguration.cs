@@ -30,6 +30,6 @@ public void Configure(EntityTypeBuilder<Category> builder)
 
         }
     }
-{
+
     }
-}
+
