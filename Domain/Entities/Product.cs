@@ -45,10 +45,10 @@ namespace Domain.Entities
             return base.ToString();
         }
 
-        //public override void GetDetails()
-        //{
+       public  void GetDetails()
+        {
 
-        //    Console.WriteLine("DateProd :"+ DateProd+ "Description "+ Description, "Name", Name, "Price", Price, "ProductId", ProductId, "Quantity", Quantity);
-        //}
+           Console.WriteLine("DateProd :"+ DateProd+ "Description "+ Description, "Name", Name, "Price", Price, "ProductId", ProductId, "Quantity", Quantity);
+        }
     }
 }

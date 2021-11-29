@@ -1,88 +1,106 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
-using Domain.Entities;
 using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using Domain.Entities;
+
 namespace Service
 {
-   public class ManageProduct
+    public class ManageProduct
     {
         private List<Product> products;
+        public delegate void FindProducts(string c );
+        public delegate void ScanProduct(Category category);
         public ManageProduct(List<Product> products)
         {
-            this.products = products;
+            this.products=products;
         }
-        public delegate void FindProduct(String letter);
-        public delegate void ScanProduct(Category categorie);
 
-        public List<Product> GetFiveChemical(double price ) {
-            var result = from product in products
-                         where (product is Chemical &&  product.Price > price )
-                         select (product);
-            // change it to list with 5
-            return result.Take(5).ToList();
 
-        
-        }
-        public List<Product> GetProductPrice(double price)
+        public void GetProductByChar(string c)
         {
-            var result = from product in products
-                         where ( product.Price < price)
-                         select (product) ;
-            // skip 2 an get the list 
-            return result.Skip(2).ToList();
-
-
+            foreach (Product product in products)
+            {
+                if (product.Name.ToUpper().StartsWith(c.ToUpper()))
+                    product.GetDetails();
+            }
+            
         }
+        #region Méthodes de sélection et d'agrégation
+        public List<Product> Get5Chemical(double price)
+        {
+            var query = from product in products
+                        where (product.Price > price)
+                        select product;
+            return query.Take(5).ToList<Product>();
+        }
+        public IEnumerable<Product> GetProductPrice(double price)
+        {
+            var query = from product in products
+                        where (product.Price > price)
+                        select product;
+            return query.Skip(2); //par défaut AsEnumerable()
+        }
+
         public double GetAveragePrice()
         {
             return (from product in products
-                    select (product.Price))
+                    select product.Price)
                     .Average();
         }
+
         public Product GetMaxPrice()
         {
-            var maxPrice= (from product in products
-                    select (product.Price))
-                    .Max();
-            var result = from product in products
-                         where product.Price == maxPrice
-                         select (product);
-          //  return result.First();
-            return result.FirstOrDefault();
+            double maxprice = (from product in products
+                               select product.Price).Max();
 
-        }
-        public int GetCountProduct(string city) {
-            var listProduct = from product in products
-                              where (product is Chemical && ((Chemical)product).MyAdress.City.Equals(city))
-                              select (product);
+            var result = (from product in products
+                          where product.Price == maxprice
+                          select product).ToList().FirstOrDefault();
 
-            return listProduct.ToList().Count();
-        }
-        public List<Product> GetChimicalCity() {
-            var result = from product in products
-                         where (product is Chemical)
-                         orderby ((Chemical)product).MyAdress.City
-                         select(product);
-            return result.ToList();
-        }
-        public void GetChimicalGroupByCity() {
-            var result = from product in products
-                         where (product is Chemical)
-                         orderby ((Chemical)product).MyAdress.City
-                         group ((Chemical)product) by ((Chemical)product).MyAdress.City;
-            //return un autre type key == entity egrouping 
 
-            foreach (var groupingProduct in result) {
-                Console.WriteLine("City ="+ groupingProduct.Key);
-                foreach (var product in groupingProduct) { 
-                Console.WriteLine("Product =" + product.Name);
+            return result;
+        }
+
+        public int GetCountProduct(string city)
+        {
+            var listProductChemical = (from product in products
+                                       where product is Chemical
+                                       && ((Chemical)product).MyAdress.City.Equals(city)
+                                       select product).ToList();
+
+            return listProductChemical.Count();
+        }
+    public List<Product> GetChemicalCity()
+    {
+        var listProductChemical = (from product in products
+                                   where product is Chemical
+                                   orderby ((Chemical)product).MyAdress.City ascending // ou descending
+                                   select product).ToList();
+
+        return listProductChemical;
+    }
+
+    public void GetChemicalGroupByCity()
+        {
+            var query = from product in products
+                        where product is Chemical
+                        orderby ((Chemical)product).MyAdress.City ascending // ou descending
+                        group (Chemical)product by ((Chemical)product).MyAdress.City;
+
+            foreach (var productgroup in query)
+            {
+                Console.WriteLine(productgroup.Key + ":");
+
+                foreach (var prdct in productgroup)
+                {
+                    Console.WriteLine("\t" + prdct.Name + " " + prdct.Price);
                 }
             }
-
-
         }
 
+        #endregion
 
     }
 }

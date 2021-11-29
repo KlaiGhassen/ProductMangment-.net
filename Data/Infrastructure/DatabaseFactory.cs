@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Data;
+using Data.Infrastructure;
 using Microsoft.EntityFrameworkCore;
 
 
@@ -11,16 +12,25 @@ namespace Data.Infrastructure
 {
     public class DatabaseFactory : Disposable, IDatabaseFactory
     {
-        private DbContext dataContext;
+        private readonly GestionProduitsContext gestionProduitsContext;
+        
+
+        public DatabaseFactory(GestionProduitsContext _gestionProduitsContext)
+        {
+            gestionProduitsContext = _gestionProduitsContext;
+        }
+
+        
         public DbContext DataContext
         {
-            get { return dataContext; }
+            get { return gestionProduitsContext; }
         }
-        public DatabaseFactory() { dataContext = new GestionProduitsContext(); }
+        
+  
         protected override void DisposeCore()
         {
-            if (dataContext != null)
-                dataContext.Dispose();
+            if (DataContext != null)
+                DataContext.Dispose();
         }
         
     }

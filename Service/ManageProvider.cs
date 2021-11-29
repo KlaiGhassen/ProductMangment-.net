@@ -2,42 +2,54 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 using Domain.Entities;
 
 namespace Service
 {
     public class ManageProvider
     {
+        
+
+        private List<Provider> Providers;
 
         public ManageProvider(List<Provider> providers)
         {
-            this.providers = providers;
+            this.Providers = providers;           
         }
 
-        public List<Provider> providers;
 
+        #region Syntaxe de base
 
-        public List<Provider>  GetProviderByName(String name) {
-        var result = from provider in providers
-                     where (provider.UserName.ToUpper().Equals(name.ToUpper()))
-                          select (provider);
-
-        return result.ToList();
-
-
-    }
-
-        public Provider getFirstByName(String name) {
-            var result = from provider in providers
-                         where (provider.UserName.ToUpper().StartsWith(name.ToUpper()))
-                         select (provider);
-            return result.First();
-        
-        
+        public List<Provider> GetProviderByName(string name)
+        {
+            var result = (from provider in Providers
+                        where provider.UserName.Contains(name)
+                        select provider).ToList();
+            return result;
         }
-        public Provider GetProvider;
+        #endregion
+        #region Méthode de sélection
+        public Provider GetFirstProviderByName(string name)
+        {
+            var prvd = (from provider in Providers
+                        where provider.UserName.Contains(name)
+                        select provider).ToList().First();
+            return prvd;
+            //si la selection est vide, utiliser FirstOrDefault
+        }
+
+        public Provider GetProviderById(int id)
+        {
+            var prvd = (from provider in Providers
+                        where provider.Id == id
+                        select provider).ToList().Single();
+            return prvd;
+            //si la selection est vide, utiliser SingleOrDefault
+        }
 
 
+        #endregion
 
     }
 

@@ -1,12 +1,13 @@
-﻿using System;
+﻿using Domain.Entities;
+using System;
 using System.Collections.Generic;
 using System.Text;
 using ServicePattern;
-using Domain.Entities;
 
 namespace Service
 {
-   public interface IproviderService: IEntityService<Provider>
+    public interface IProviderService : IEntityService<Provider>
     {
+
     }
 }

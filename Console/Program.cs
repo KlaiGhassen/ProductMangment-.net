@@ -1,8 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using Domain.Entities;
-using Service;
 using Data;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.EntityFrameworkCore;
+using Data.Infrastructure;
+using Service;
+
+
 namespace Console
     
 {
@@ -10,6 +15,35 @@ namespace Console
     {
         static void Main(string[] args)
         {
+
+            var serviceCollection = new ServiceCollection();
+            var seviceProvider = serviceCollection.AddScoped<ICategoryService, CategoryService>()
+                                .AddScoped<IProductService, ProductService>()
+                .AddScoped<IFactureService,FactureService>()
+
+                .AddScoped<IProviderService,ProviderService>()
+
+                .AddScoped<IClientService,ClientService>()
+                .AddTransient<IUnitOfWork, UnitOfWork>()
+                .AddTransient(typeof(IRepositoryBase<>), typeof(RepositoryBase<>))
+                .AddSingleton<IDatabaseFactory,DatabaseFactory>()
+                .AddDbContext<GestionProduitsContext>()
+                .BuildServiceProvider();
+
+
+                
+
+          var serviceCategory= seviceProvider.GetService<ICategoryService>();
+            //var category = new Category();
+            //category.Name = "Ghassen";
+            //serviceCategory.Add(category);
+            //serviceCategory.Commit();
+
+
+
+
+
+
 
             // Creating data base add tables 
             //using (var context = new GestionProduitsContext()) {
@@ -22,7 +56,7 @@ namespace Console
 
             //    context.Produts.Add(acide);
             //    context.SaveChanges();
-               
+
 
 
             //}
@@ -153,5 +187,55 @@ namespace Console
 
 
         }
+
+        public static void initData(ServiceProvider serviceProvider) {
+
+            Category Alimentaire = new Category()
+            
+            { Name = "Alimentaire" };
+            Provider P1 = new Provider() { Password = "12345", ConfirmedPassword = "123456",
+            DateCreated=DateTime.Now,
+            Email="ghassen.klai@gmail0com",
+            UserName="GhassenKlai"
+            };
+            Adrress adress = new Adrress()
+            {
+                City = "sousse",
+                StreetAddress = "sousse"
+            };
+            var client = new Client()
+            {
+                Cin = 13629722,
+                DateNaissence = "25/01/1997",
+                Nom = "ghassen",
+                Prenom = "klai",
+
+            };
+            Product acide = new Chemical()
+            {
+                DateProd = new DateTime(2000, 12, 12),
+                Name = "ACIDE CITRIQUE",
+                Description = "Monohydrate - E330 - USP32",
+                MyCategory = Alimentaire,
+                Price = 90,
+                Quantity = 30,
+                image = "c:/helloworld",
+                MyAdress = adress,
+            };
+
+
+            var facture = new Facture()
+            {client=client,
+            DateAchat=DateTime.Now,
+            prix=50,
+                product =acide,
+
+                
+
+            };
+          
+          
+        }
+
     }
 }
